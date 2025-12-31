@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>I Love You Too</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <style>
+    .card {
+      position: relative;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: -2px;
+      border-radius: 22px;
+      background: linear-gradient(135deg, #ff9a8b, #ff6a88, #ff99ac);
+      filter: blur(30px);
+      opacity: .6;
+      z-index: -1;
+    }
+
+    /* make gif rounded & cute */
+    .gif-box {
+      width: 220px;
+      border-radius: 18px;
+      overflow: hidden;
+    }
+
+    /* typewriter caret */
+    .typewriter span {
+      border-right: 2px solid rgba(255, 255, 255, .8);
+      animation: blink .8s infinite;
+    }
+
+    @keyframes blink {
+      50% {
+        border-color: transparent;
+      }
+    }
+
+    /* pulsing “I love you too” */
+    .pulse {
+      margin-top: 14px;
+      font-size: 1.2rem;
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0% {
+        transform: scale(1);
+        opacity: .9;
+      }
+
+      50% {
+        transform: scale(1.08);
+        opacity: 1;
+      }
+
+      100% {
+        transform: scale(1);
+        opacity: .9;
+      }
+    }
+
+    /* falling hearts (continuous) */
+    .confetti-heart {
+      position: fixed;
+      font-size: 22px;
+      animation: pop 1.8s ease-out forwards;
+      pointer-events: none;
+    }
+
+    @keyframes pop {
+      0% {
+        transform: translateY(0) scale(.6);
+        opacity: 1;
+      }
+
+      80% {
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(-120px) scale(1.5);
+        opacity: 0;
+      }
+    }
+
+    /* explosion burst */
+    .burst-heart {
+      position: fixed;
+      font-size: 18px;
+      pointer-events: none;
+      animation: burst 1.4s ease-out forwards;
+    }
+
+    @keyframes burst {
+      0% {
+        transform: translate(-50%, -50%) scale(.5);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translate(var(--x), var(--y)) scale(1.8);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="petals-container"></div>
+
+  <div class="wrapper">
+    <div class="card">
+
+      <!-- 💕 YOUR GIF HERE -->
+      <div class="gif-box">
+        <div class="tenor-gif-embed" data-postid="4207832918658052491" data-share-method="host" data-aspect-ratio="1"
+          data-width="100%">
+        </div>
+      </div>
+        
+      <h1>Yaaay! 💖</h1>
+
+      <p class="typewriter">
+        <span id="msg"></span>
+      </p>
+
+      <p class="pulse">I love you too 💕</p>
+
+      <p style="opacity:.9;">
+        You just made my whole day 🥹✨
+      </p>
+    </div>
+  </div>
+
+  <!-- Tenor script -->
+  <script async src="https://tenor.com/embed.js"></script>
+
+  <!-- 💖 Scripts ALWAYS at the bottom -->
+  <script>
+    /* TYPEWRITER */
+    document.addEventListener("DOMContentLoaded", () => {
+      const text = "Mujhe pata tha tum haan hi bologe 😍";
+      const msg = document.getElementById("msg");
+      let i = 0;
+
+      function type() {
+        if (i < text.length) {
+          msg.textContent += text.charAt(i);
+          i++;
+          setTimeout(type, 60);
+        }
+      }
+      type();
+    });
+
+    /* CONTINUOUS HEARTS */
+    function dropHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("confetti-heart");
+      heart.innerHTML = ["💖", "💕", "💗", "❤️", "💓"][Math.floor(Math.random() * 5)];
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.bottom = "0px";
+      heart.style.animationDuration = (1.2 + Math.random() * 1) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 2000);
+    }
+    setInterval(dropHeart, 250);
+
+    /* CONFETTI EXPLOSION ON LOAD */
+    function confettiBurst() {
+      for (let i = 0; i < 40; i++) {
+        const heart = document.createElement("div");
+        heart.classList.add("burst-heart");
+        heart.innerHTML = ["💖", "💕", "💗", "❤️", "💓"][Math.floor(Math.random() * 5)];
+        heart.style.left = "50%";
+        heart.style.top = "50%";
+
+        const angle = Math.random() * 360;
+        const distance = Math.random() * 180 + 60;
+
+        heart.style.setProperty("--x", `${Math.cos(angle) * distance}px`);
+        heart.style.setProperty("--y", `${Math.sin(angle) * distance}px`);
+
+        document.body.appendChild(heart);
+        setTimeout(() => heart.remove(), 1400);
+      }
+    }
+
+    window.onload = confettiBurst;
+  </script>
+
+  <script src="petals.js"></script>
+</body>
+
+</html>

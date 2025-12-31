@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ask Her Out</title>
+
+  <link rel="stylesheet" href="./style.css" />
+</head>
+
+<body>
+
+  <!-- floating hearts -->
+  <div class="petals-container"></div>
+
+  <div class="container glass">
+    <div class="tenor-gif-embed"
+      data-postid="15974530976611222074"
+      data-share-method="host"
+      data-aspect-ratio="1.26923"
+      data-width="100%">
+    </div>
+    <script async src="https://tenor.com/embed.js"></script>
+
+    <h1>Baby man jao na! Kitna bhav khaogi 😭</h1>
+    <p>Bahut galat baat hai yrr 😭</p>
+
+    <div class="btn">
+      <a href="ndexyes.html" class="yes">Yes</a>
+      <a href="#" id="move-random" class="no">No</a>
+    </div>
+  </div>
+
+  <script>
+    // NO button runs away
+    function moveRandomEl(elm) {
+      elm.style.position = "absolute";
+      elm.style.top = Math.floor(Math.random() * 85 + 5) + "%";
+      elm.style.left = Math.floor(Math.random() * 85 + 5) + "%";
+    }
+
+    const moveRandom = document.querySelector("#move-random");
+
+    moveRandom.addEventListener("mouseenter", function (e) {
+      moveRandomEl(e.target);
+    });
+
+    // Floating hearts
+    const container = document.querySelector(".petals-container");
+
+    function createHeart() {
+      const heart = document.createElement("div");
+      heart.classList.add("heart");
+      heart.innerHTML = "💗";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 14 + 14 + "px";
+      heart.style.animationDuration = Math.random() * 4 + 4 + "s";
+
+      container.appendChild(heart);
+      setTimeout(() => heart.remove(), 9000);
+    }
+
+    setInterval(createHeart, 300);
+  </script>
+
+</body>
+</html>
