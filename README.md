@@ -36,7 +36,7 @@
 
 > _“Sometimes feelings are better expressed with colors, motion… and JavaScript.”_  
 
-(Add a link or screenshots here when ready 📸)
+
 
 ---
 
